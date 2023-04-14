@@ -1,0 +1,4 @@
+openai[embeddings]
+pandas
+streamlit
+python-dotenv
