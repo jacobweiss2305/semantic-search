@@ -57,10 +57,7 @@ uploaded_file = st.file_uploader("Upload file", type=['csv'])
 if uploaded_file is not None:
 
     if '.csv' in uploaded_file.name:
-        df = pd.read_csv(uploaded_file, nrows=1000)
-
-        if 'text' not in df.columns:
-            df['text'] = df['Event'] + df['Sport']
+        df = pd.read_csv(uploaded_file, nrows=100)
 
     st.dataframe(df)
 
