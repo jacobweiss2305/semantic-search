@@ -53,7 +53,10 @@ uploaded_file = st.file_uploader("Upload file", type=['csv'])
 if uploaded_file is not None:
 
     if '.csv' in uploaded_file.name:
-        df = pd.read_csv(uploaded_file, nrows=10000)
+        df = pd.read_csv(uploaded_file, nrows=1000)
+    
+    elif '.xlsx' in uploaded_file.name:
+        df = pd.read_excel(uploaded_file, nrows=1000)
 
     st.dataframe(df)
 
@@ -67,7 +70,7 @@ if uploaded_file is not None:
 
         embedding = embedding_from_string(text_input)
 
-        text_embeddings = [embedding_from_string(str(i)) for i in list(df['text'])]
+        text_embeddings = [embedding_from_string(str(i)) for i in list(df[id_column])]
 
         scores = [cosine_similarity(i, embedding) for i in text_embeddings]
 
