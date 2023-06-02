@@ -14,9 +14,6 @@ import pickle
 
 EMBEDDING_MODEL = "text-embedding-ada-002"
 
-# establish a cache of embeddings to avoid recomputing
-# cache is a dict of tuples (text, model) -> embedding, saved as a pickle file
-
 # set path to embedding cache
 embedding_cache_path = "recommendations_embeddings_cache.pkl"
 
@@ -43,7 +40,6 @@ def embedding_from_string(
 
 load_dotenv()
 
-
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 st.title("OpenAI Semantic Search")
@@ -57,7 +53,7 @@ uploaded_file = st.file_uploader("Upload file", type=['csv'])
 if uploaded_file is not None:
 
     if '.csv' in uploaded_file.name:
-        df = pd.read_csv(uploaded_file, nrows=100)
+        df = pd.read_csv(uploaded_file, nrows=10000)
 
     st.dataframe(df)
 
